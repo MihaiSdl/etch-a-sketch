@@ -4,13 +4,19 @@ const sizeSlider = document.getElementById('sizeSlider')
 const container = document.getElementById("mainContainer");
 
 sizeSlider.onchange = (e) => updateSize(e.target.value);
-sizeSlider.onchange = (e) => updateSizeDisplay(e.target.value)
+sizeSlider.onmousemove = (e) => updateSizeDisplay(e.target.value)
 
 
 function updateSize(input) {
     clearGrid();
+    updateSizeDisplay(input);
     gridCreator(input);
-  }
+    
+}
+
+function updateSizeDisplay(input) {
+    sizeValue.textContent = `${input} x ${input}`
+}
   
   function clearGrid() {
     container.innerHTML = '';
@@ -23,12 +29,11 @@ function gridCreator(squareNumber) {
 
     for (var i = 0; i < (squareNumber * squareNumber); i++) {
         let cell = document.createElement("div");
-        cell.style.borderStyle = "solid";
-        cell.style.borderColor = "white";
+
         container.appendChild(cell).className = "grid-item";
 
         cell.addEventListener('mouseover', function handleMouseOver() {
-            cell.style.backgroundColor = 'red';
+            cell.style.backgroundColor = 'black';
         });
 
     };
